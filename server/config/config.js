@@ -35,3 +35,8 @@ process.env.URLDB = urlDB;
   * SEED DE AUTENTICACIÓN
   */
   process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
+
+  /**
+   * GOOGLE CLIENT ID
+   */
+  process.env.CLIENT_ID = process.env.CLIENT_ID || '1077805038766-c64kfee62gpdtnlanv37q3rr5d2tbsb4.apps.googleusercontent.com';
