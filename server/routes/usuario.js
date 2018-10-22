@@ -4,7 +4,7 @@ const Usuario = require('../models/usuarios');
 const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion')
 const _ = require('underscore');
 const app = express();
-
+var httpStatus = require('http-status-codes');
 
 app.get('/usuario', verificaToken, (req, res) => {
 
@@ -62,7 +62,7 @@ app.post('/usuario', [verificaToken, verificaAdmin_Role], (req, res) => {
     });
 })
 
-app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) =>{
+app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
 
     let id = req.params.id;
 
@@ -85,7 +85,7 @@ app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) =>{
 
 })
 
-app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) =>{
+app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
 
     let id = req.params.id;
 

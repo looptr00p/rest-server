@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {verificaToken} = require('../middlewares/autenticacion');
+const { verificaToken } = require('../middlewares/autenticacion');
 
 let app = express();
 let productoController = require('../controller/productoController');
@@ -9,15 +9,15 @@ let productoController = require('../controller/productoController');
 app.get('/producto/', productoController.getProductos);
 
 /**Obtener un Producto por Id*/
-app.get('/producto/:id');
+app.get('/producto/:id', verificaToken, productoController.getProductosById);
 
 /**Cargar un Producto */
 app.post('/producto/', verificaToken, productoController.postProducto);
 
 /**Actualizar un Producto */
-app.put('/producto/');
+app.put('/producto/:id', verificaToken, productoController.putProducto);
 
 /**Eliminar un Producto */
-app.delete('/producto/');
+app.delete('/producto/:id', verificaToken, productoController.deleteProducto);
 
 module.exports = app;

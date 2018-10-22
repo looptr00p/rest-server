@@ -2,7 +2,7 @@ var httpStatus = require('http-status-codes');
 const Categoria = require('../models/categoria');
 
 module.exports = {
-    postCategoria: async(req,res) =>{
+    postCategoria: async(req, res) => {
         try {
             let categoria = new Categoria({
                 descripcion: req.body.descripcion,
@@ -10,20 +10,20 @@ module.exports = {
             });
 
             const categorias = await categoria.save();
-            return res.status(httpStatus.OK).json({succes: true, categoria: categorias});
+            return res.status(httpStatus.OK).json({ succes: true, categoria: categorias });
         } catch (error) {
-            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error});
+            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error });
         }
     },
-    
-    getCategorias: async(req,res) => {
+
+    getCategorias: async(req, res) => {
         try {
             const categorias = await Categoria.find({})
-                                            .sort('descripcion')
-                                            .populate('usuario', 'nombre email')
-            return res.status(httpStatus.OK).json({ succes: true, categorias});
+                .sort('descripcion')
+                .populate('usuario', 'nombre email')
+            return res.status(httpStatus.OK).json({ succes: true, categorias });
         } catch (error) {
-            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error});
+            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error });
         }
     },
 
@@ -32,32 +32,31 @@ module.exports = {
             let id = req.params.id;
 
             const categorias = await Categoria.findById(id);
-            return res.status(httpStatus.OK).json({succes: true, categorias});
+            return res.status(httpStatus.OK).json({ succes: true, categorias });
         } catch (error) {
-            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error});
+            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error });
         }
     },
 
-    putCategorias: async(req, res) =>{
+    putCategorias: async(req, res) => {
         try {
             let id = req.params.id;
-            let descripcion = req.body.descripcion;
-
-            const categorias = await Categoria.findByIdAndUpdate(id, descripcion,{ new: true, runValidators: true });
-            return res.status(httpStatus.OK).json({succes: true, categorias});
+            let body = req.body;
+            const categorias = await Categoria.findByIdAndUpdate(id, body, { new: true, runValidators: true });
+            return res.status(httpStatus.OK).json({ succes: true, categorias });
         } catch (error) {
-            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error});
+            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error });
         }
     },
 
-    deleteCategorias: async(req, res) =>{
+    deleteCategorias: async(req, res) => {
         try {
             let id = req.params.id;
 
             const categorias = await Categoria.findOneAndDelete(id);
-            return res.status(httpStatus.OK).json({succes: true, categorias});
+            return res.status(httpStatus.OK).json({ succes: true, categorias });
         } catch (error) {
-            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error});
+            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error });
         }
     }
 }
