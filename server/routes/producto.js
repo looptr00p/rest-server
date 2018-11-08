@@ -20,4 +20,9 @@ app.put('/producto/:id', verificaToken, productoController.putProducto);
 /**Eliminar un Producto */
 app.delete('/producto/:id', verificaToken, productoController.deleteProducto);
 
+/**Buscar Productos */
+app.get('/producto/buscar/:termino', verificaToken, productoController.buscarProducto, (req, res) => {
+
+})
+
 module.exports = app;

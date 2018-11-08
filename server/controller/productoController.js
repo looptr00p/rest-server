@@ -70,6 +70,19 @@ module.exports = {
             return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error });
         }
 
+    },
+
+    buscarProducto: async(req, res) => {
+        try {
+            let termino = req.params.termino;
+
+            let regex = new RegExp(termino, 'i'); //la i es para que sea case insensitive
+
+            const productos = await Producto.find({ nombre: regex }).populate('categoria', 'nombre');
+            return res.status(httpStatus.OK).json({ succes: true, productos });
+        } catch (error) {
+            return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ succes: false, error });
+        }
     }
 
 }
